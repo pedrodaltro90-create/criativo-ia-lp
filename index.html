@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRIATIVO.AI — Roteiros que vendem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --bg2: #111111;
+  --bg3: #181818;
+  --ink: #f0ece0;
+  --dim: #7a7670;
+  --mute: #3a3830;
+  --ac: #d9ff00;
+  --warm: #ff5c1a;
+  --line: #1e1e1e;
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.012) 1px, transparent 0);
+  background-size: 4px 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  background: rgba(8,8,8,.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .18em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dot {
+  width: 8px; height: 8px;
+  background: var(--ac);
+  border-radius: 50%;
+  box-shadow: 0 0 16px var(--ac);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:.5; transform:scale(.8); }
+}
+.logo-ai { color: var(--ac); }
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  background: var(--ac);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all .2s;
+}
+.nav-cta:hover { background: var(--ink); }
+
+/* HERO */
+.hero {
+  padding: 160px 0 100px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px; right: -300px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(217,255,0,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--ac);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: fadeUp .8s ease .1s forwards;
+}
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--ac); }
+
+.hero h1 {
+  font-weight: 200;
+  font-size: clamp(48px, 8vw, 96px);
+  line-height: .95;
+  letter-spacing: -.04em;
+  margin-bottom: 36px;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp .8s ease .2s forwards;
+}
+.hero h1 em { font-style: italic; font-weight: 300; color: var(--ac); }
+.hero h1 strong { font-weight: 700; font-style: normal; }
+
+.hero-sub {
+  font-size: 20px;
+  color: var(--dim);
+  max-width: 600px;
+  line-height: 1.55;
+  font-weight: 300;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeUp .8s ease .3s forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp .8s ease .4s forwards;
+}
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  background: var(--ac);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all .25s;
+}
+.btn-primary:hover { background: var(--ink); transform: translateX(3px); }
+.btn-secondary {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 18px 36px;
+  background: transparent;
+  color: var(--dim);
+  border: 1px solid var(--mute);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all .25s;
+}
+.btn-secondary:hover { color: var(--ink); border-color: var(--dim); }
+
+.hero-proof {
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp .8s ease .5s forwards;
+}
+.proof-n { font-size: 42px; font-weight: 600; letter-spacing: -.03em; color: var(--ac); }
+.proof-l { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; margin-top: 4px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* PROBLEM */
+.problem {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .3em;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sec-tag::before { content: ''; width: 20px; height: 1px; background: var(--dim); }
+.problem h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 48px;
+  max-width: 800px;
+}
+.problem h2 em { font-style: italic; color: var(--warm); }
+
+.pains {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  margin-bottom: 64px;
+}
+.pain {
+  background: var(--bg2);
+  padding: 32px;
+  border-left: 3px solid var(--warm);
+}
+.pain-icon { font-size: 24px; margin-bottom: 16px; }
+.pain p { font-size: 16px; color: var(--dim); line-height: 1.6; }
+.pain strong { color: var(--ink); }
+
+.problem-stmt {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ac);
+  padding: 36px 40px;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--dim);
+  line-height: 1.6;
+  max-width: 760px;
+}
+.problem-stmt strong { color: var(--ac); font-style: normal; }
+
+/* HOW IT WORKS */
+.how {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+}
+.how h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 72px;
+}
+.how h2 em { font-style: italic; color: var(--ac); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+}
+.step {
+  background: var(--bg2);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: all .3s;
+}
+.step:hover { background: var(--bg3); transform: translateY(-4px); }
+.step::before {
+  content: attr(data-n);
+  position: absolute;
+  top: -20px; right: 20px;
+  font-family: var(--mono);
+  font-size: 80px;
+  font-weight: 700;
+  color: rgba(217,255,0,.04);
+  line-height: 1;
+  pointer-events: none;
+}
+.step-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--ac);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.step h3 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+.step p { font-size: 15px; color: var(--dim); line-height: 1.6; }
+
+/* RESULT */
+.result-sec {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg2);
+}
+.result-sec h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 16px;
+}
+.result-sec h2 em { font-style: italic; color: var(--ac); }
+.result-sub { color: var(--dim); font-size: 18px; margin-bottom: 72px; max-width: 560px; }
+
+.formats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2px;
+  margin-bottom: 64px;
+}
+.format {
+  background: var(--bg);
+  padding: 32px;
+  border-top: 2px solid var(--ac);
+  transition: all .3s;
+}
+.format:hover { transform: translateY(-3px); }
+.format-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--ac);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.format h4 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+.format p { font-size: 14px; color: var(--dim); line-height: 1.55; }
+
+.result-note {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: .05em;
+  padding: 20px 28px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: inline-block;
+}
+.result-note strong { color: var(--ac); }
+
+/* TESTIMONIAL */
+.testimonial-sec {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+}
+.testimonial-sec h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 52px);
+  letter-spacing: -.03em;
+  margin-bottom: 64px;
+}
+.testimonial-sec h2 em { font-style: italic; color: var(--ac); }
+
+.testimonial {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ac);
+  padding: 48px;
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+.test-quote {
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+.test-quote::before { content: '"'; color: var(--ac); font-size: 32px; }
+.test-quote::after { content: '"'; color: var(--ac); font-size: 32px; }
+.test-person { font-family: var(--mono); font-size: 12px; color: var(--dim); letter-spacing: .1em; }
+.test-person strong { color: var(--ac); }
+
+.test-placeholder {
+  background: var(--bg2);
+  border: 1px dashed var(--mute);
+  padding: 48px;
+  max-width: 760px;
+  text-align: center;
+}
+.test-placeholder p { font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: .1em; }
+
+/* PRICING */
+.pricing {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg2);
+}
+.pricing h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 60px);
+  letter-spacing: -.03em;
+  margin-bottom: 16px;
+}
+.pricing h2 em { font-style: italic; color: var(--ac); }
+.pricing-sub { color: var(--dim); font-size: 18px; margin-bottom: 72px; }
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2px;
+}
+.plan {
+  background: var(--bg);
+  padding: 48px 40px;
+  position: relative;
+  transition: all .3s;
+}
+.plan:hover { transform: translateY(-4px); }
+.plan.featured {
+  background: var(--bg3);
+  border: 1px solid rgba(217,255,0,.3);
+}
+.plan-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  background: var(--ac);
+  color: var(--bg);
+  padding: 4px 12px;
+  display: inline-block;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+.plan-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .2em;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.plan-price {
+  font-size: 56px;
+  font-weight: 200;
+  letter-spacing: -.04em;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.plan-price span { font-size: 22px; color: var(--dim); }
+.plan-period {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: .1em;
+  margin-bottom: 36px;
+}
+.plan-features {
+  list-style: none;
+  margin-bottom: 40px;
+}
+.plan-features li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.plan-features li::before { content: '✓'; color: var(--ac); font-weight: 700; flex-shrink: 0; }
+.plan-features li strong { color: var(--ink); }
+.plan-cta {
+  display: block;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 18px;
+  background: var(--ac);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  transition: all .25s;
+}
+.plan-cta:hover { background: var(--ink); }
+.plan-cta.outline {
+  background: transparent;
+  color: var(--dim);
+  border: 1px solid var(--mute);
+}
+.plan-cta.outline:hover { color: var(--ink); border-color: var(--dim); background: transparent; }
+
+/* FAQ */
+.faq {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq h2 {
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: -.03em;
+  margin-bottom: 64px;
+}
+.faq h2 em { font-style: italic; color: var(--ac); }
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  text-align: left;
+  padding: 28px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--ac); }
+.faq-icon {
+  width: 32px; height: 32px;
+  border: 1px solid var(--mute);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--ac);
+  flex-shrink: 0;
+  transition: all .3s;
+  font-weight: 300;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--ac); }
+.faq-a {
+  display: none;
+  padding: 0 0 28px;
+  color: var(--dim);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 720px;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* CTA FINAL */
+.cta-final {
+  padding: 140px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(217,255,0,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-final h2 {
+  font-weight: 200;
+  font-size: clamp(44px, 7vw, 88px);
+  line-height: .95;
+  letter-spacing: -.04em;
+  margin-bottom: 24px;
+}
+.cta-final h2 em { font-style: italic; color: var(--ac); }
+.cta-final p {
+  color: var(--dim);
+  font-size: 18px;
+  margin-bottom: 48px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-final .btn-primary { font-size: 13px; padding: 20px 48px; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 40px 0;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo { font-family: var(--mono); font-size: 13px; letter-spacing: .15em; display: flex; align-items: center; gap: 8px; }
+.footer-logo .ai { color: var(--ac); }
+.footer-copy { font-family: var(--mono); font-size: 10px; color: var(--mute); letter-spacing: .1em; }
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 20px; }
+  .hero { padding: 120px 0 80px; }
+  .hero-proof { gap: 32px; }
+  .pains, .steps, .formats, .plans { grid-template-columns: 1fr; }
+  .hero-ctas { flex-direction: column; }
+  .btn-primary, .btn-secondary { justify-content: center; }
+  .testimonial, .test-placeholder { padding: 32px 24px; }
+  .plan { padding: 36px 28px; }
+  .nav-cta { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">
+      <span class="dot"></span>
+      CRIATIVO<span class="logo-ai">.AI</span>
+    </div>
+    <a href="#planos" class="nav-cta">Começar agora →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag">Roteiros de anúncios com IA</div>
+    <h1>Os formatos que já geraram <em>milhões.</em> Agora adaptados pro <strong>seu negócio.</strong></h1>
+    <p class="hero-sub">Os mesmos ângulos e estruturas que já geraram milhões em faturamento — agora disponíveis pra qualquer negócio, sem agência, sem copywriter, sem achismo.</p>
+    <div class="hero-ctas">
+      <a href="#planos" class="btn-primary">Quero meus roteiros →</a>
+      <a href="#como-funciona" class="btn-secondary">Ver como funciona</a>
+    </div>
+    <div class="hero-proof">
+      <div>
+        <div class="proof-n">6</div>
+        <div class="proof-l">Roteiros por geração</div>
+      </div>
+      <div>
+        <div class="proof-n">≤45s</div>
+        <div class="proof-l">Duração de cada roteiro</div>
+      </div>
+      <div>
+        <div class="proof-n">~60s</div>
+        <div class="proof-l">Pra gerar tudo</div>
+      </div>
+      <div>
+        <div class="proof-n">8</div>
+        <div class="proof-l">Perguntas no briefing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="wrap">
+    <div class="sec-tag">O problema</div>
+    <h2>Criativos que morrem em 7 dias <em>não são azar.</em> São estrutura errada.</h2>
+    <div class="pains">
+      <div class="pain">
+        <div class="pain-icon">📉</div>
+        <p><strong>Performance cai toda semana.</strong> Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">🕐</div>
+        <p><strong>Horas perdidas pra produzir um anúncio.</strong> Reunião com agência, briefing, revisão, aprovação — e ainda pode não converter.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">💸</div>
+        <p><strong>Budget indo embora.</strong> Tráfego pago caro demais pra testar na base do achismo sem estrutura comprovada.</p>
+      </div>
+      <div class="pain">
+        <div class="pain-icon">🔁</div>
+        <p><strong>Sempre os mesmos formatos.</strong> Talking head, depoimento, produto na mão — sem ângulos novos que prendam a atenção.</p>
+      </div>
+    </div>
+    <div class="problem-stmt">
+      O problema não é falta de criatividade. É falta de <strong>estrutura validada</strong> — ângulos, formatos e ganchos que já provaram que funcionam, adaptados pro seu negócio e público.
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-tag">Como funciona</div>
+    <h2>8 perguntas. 60 segundos. <em>6 roteiros prontos</em> pra gravar.</h2>
+    <div class="steps">
+      <div class="step" data-n="01">
+        <div class="step-n">01 — Briefing</div>
+        <h3>Você responde 8 perguntas</h3>
+        <p>Produto, público, dor, solução, prova, estilo de gravação, ângulo e tom. Tudo que a IA precisa pra calibrar os roteiros pro seu cenário específico.</p>
+      </div>
+      <div class="step" data-n="02">
+        <div class="step-n">02 — Análise</div>
+        <h3>A IA escolhe os melhores formatos</h3>
+        <p>O motor analisa seu público, nível de consciência e estilo — e seleciona os 3 formatos com maior potencial de conversão pra esse contexto.</p>
+      </div>
+      <div class="step" data-n="03">
+        <div class="step-n">03 — Geração</div>
+        <h3>6 roteiros prontos em 45 segundos</h3>
+        <p>Cada formato vem com 2 variações (ângulos diferentes), fala completa, direção visual, instruções de gravação e checklist. Pronto pra apertar REC.</p>
+      </div>
+      <div class="step" data-n="04">
+        <div class="step-n">04 — Gravação</div>
+        <h3>Você grava e publica</h3>
+        <p>Sem depender de agência, copywriter ou gestor. Os roteiros têm no máximo 45 segundos — cabem em qualquer formato de anúncio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-sec">
+  <div class="wrap">
+    <div class="sec-tag">Quem já usa</div>
+    <h2>Resultados de quem <em>já gravou.</em></h2>
+
+    <div class="testimonial">
+      <div class="test-quote">Ferramenta sensacional! Trabalho criando roteiros semanalmente para meus clientes e para mim mesmo. A ferramenta conseguiu gerar roteiros que realmente dão resultado. Um dos roteiros que fiz com a ferramenta já faturei +R$1.000,00 no tráfego.</div>
+      <div class="test-person"><strong>Gestor de tráfego</strong> — usuário do plano Agências</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="planos">
+  <div class="wrap">
+    <div class="sec-tag">Planos</div>
+    <h2>Escolha seu <em>plano.</em></h2>
+    <p class="pricing-sub">Acesso imediato após o pagamento. Cancele quando quiser.</p>
+    <div class="plans">
+      <div class="plan">
+        <div class="plan-name">Essencial</div>
+        <div class="plan-price"><span>R$</span>37</div>
+        <div class="plan-period">por mês</div>
+        <ul class="plan-features">
+          <li><strong>Acesso completo</strong> à ferramenta</li>
+          <li><strong>4 gerações</strong> por mês (= 24 roteiros)</li>
+          <li>3 formatos validados por geração</li>
+          <li>Instruções de gravação completas</li>
+          <li>Checklist visual</li>
+          <li>Download em PDF</li>
+          <li>Sem repetição de formatos entre gerações</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/7G5JvcB" class="plan-cta outline">Assinar Essencial →</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Mais popular</div>
+        <div class="plan-name">Agências</div>
+        <div class="plan-price"><span>R$</span>97</div>
+        <div class="plan-period">por mês</div>
+        <ul class="plan-features">
+          <li><strong>Tudo do Essencial</strong></li>
+          <li><strong>15 gerações</strong> por mês (= 90 roteiros)</li>
+          <li>Volume para múltiplos clientes</li>
+          <li>Ideal para gestores de tráfego</li>
+          <li>Roteiros personalizados por cliente</li>
+          <li>Instrução de câmera, tom e edição</li>
+          <li>Erros que matam cada formato</li>
+        </ul>
+        <a href="https://pay.kiwify.com.br/xCF0TeQ" class="plan-cta">Assinar Agências →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="sec-tag">Dúvidas</div>
+    <h2>Perguntas <em>frequentes.</em></h2>
+
+    <div class="faq-item">
+      <button class="faq-q">Preciso saber escrever copy pra usar?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Não. Você responde 8 perguntas sobre seu produto e público — a IA cuida de tudo. O roteiro já vem com fala completa, pronto pra gravar. Sem conhecimento técnico necessário.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Funciona pra qualquer nicho?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Sim. A IA adapta os roteiros baseada nas suas respostas — produto, público, tom e estilo. Já foi usado em infoprodutos, serviços locais, e-commerce, SaaS e mentorias.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Quanto tempo leva pra gerar os roteiros?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Em média 60 segundos após você completar o briefing de 8 perguntas. O resultado vem com 6 roteiros completos — fala, visual e instruções de gravação.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Posso cancelar quando quiser?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Sim. A assinatura é mensal e você cancela a qualquer momento diretamente pelo Kiwify, sem burocracia.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Posso usar pra mais de um cliente?<span class="faq-icon">+</span></button>
+      <div class="faq-a">O plano Agências foi feito pra isso — volume suficiente pra atender múltiplos clientes por mês. Cada geração é um briefing diferente, então os roteiros são sempre personalizados pro produto e público de cada cliente.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Os roteiros repetem os mesmos formatos?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Não. O sistema bloqueia automaticamente os formatos já usados nas gerações anteriores do mês — garantindo que cada geração traga ângulos novos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <h2>Pronto pra apertar <em>REC?</em></h2>
+    <p>Do briefing ao roteiro filmável em menos de 60 segundos. Sem agência, sem copywriter, sem achismo.</p>
+    <a href="#planos" class="btn-primary">Quero meus roteiros agora →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-logo">
+      <span class="dot"></span>
+      CRIATIVO<span class="ai">.AI</span>
+    </div>
+    <div class="footer-copy">© 2025 CRIATIVO.AI — Todos os direitos reservados</div>
+  </div>
+</footer>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.pain, .step, .format, .plan, .testimonial, .test-placeholder').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .6s ease, transform .6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
