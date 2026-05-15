@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Roteiros de anúncio em vídeo gerados por IA — com base nos formatos que já geraram R$7M em faturamento. 8 perguntas. 60 segundos. 6 roteiros prontos pra gravar.">
+<meta name="description" content="Roteiros de anúncio em vídeo gerados por IA — com base nos formatos que já geraram 7 milhões de reais em faturamento. 8 perguntas. 60 segundos. 6 roteiros prontos pra gravar.">
 <meta name="theme-color" content="#080808">
 <meta property="og:title" content="CRIATIVO.AI — Roteiros que vendem">
 <meta property="og:description" content="Os formatos que já geraram milhões. Adaptados pro seu negócio em 60 segundos.">
@@ -487,6 +487,29 @@ section > .wrap > p.sec-sub {
   padding: clamp(48px, 7vw, 80px) clamp(36px, 6vw, 72px);
   margin-top: 50px;
   position: relative;
+  overflow: hidden;
+}
+/* Decorative grid lines overlay */
+.testimonial::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,247,14,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,247,14,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Accent corner bar */
+.testimonial .test-accent-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(180deg, var(--ac) 0%, transparent 100%);
+  pointer-events: none;
 }
 .testimonial::before {
   content: '"';
@@ -499,6 +522,7 @@ section > .wrap > p.sec-sub {
   line-height: 1;
   font-style: italic;
   pointer-events: none;
+  z-index: 1;
 }
 .test-quote {
   font-family: var(--serif);
@@ -880,7 +904,7 @@ footer {
   <div class="wrap reveal-stagger" id="hero-stagger">
     <div class="hero-tag">Roteiros de anúncio com IA</div>
     <h1>Roteiros que parecem <em>Reels.</em><br>Resultado que parece <strong><em>mágica.</em></strong></h1>
-    <p class="hero-sub">Chega de copiar prompt no ChatGPT e receber texto com cara de anúncio. O CRIATIVO.AI usa os formatos que já geraram R$7M em faturamento — e adapta pra você gravar hoje.</p>
+    <p class="hero-sub">Chega de copiar prompt no ChatGPT e receber texto com cara de anúncio. O CRIATIVO.AI usa os formatos que já geraram 7 milhões de reais em faturamento, e adapta pra você gravar hoje.</p>
     <div class="hero-ctas">
       <a href="#planos" class="btn btn-primary">Quero meus roteiros →</a>
       <a href="#como-funciona" class="btn btn-secondary">Ver como funciona</a>
@@ -912,19 +936,18 @@ footer {
 <section class="problem">
   <div class="wrap">
     <div class="sec-tag reveal">O problema</div>
-    <h2 class="reveal">Criativos que morrem em 7 dias <em>não são azar.</em> São estrutura errada.</h2>
-    <p class="sec-sub reveal">Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo. O problema não é falta de ideia. É falta de estrutura validada.</p>
+    <h2 class="reveal">Criativos que morrem em 7 dias <em>não é azar.</em> É estrutura errada.</h2>
 
     <div class="pains">
       <div class="pain reveal">
         <div class="pain-icon">📉</div>
         <div class="pain-title">Performance cai toda semana.</div>
-        <p>Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo CPL alto, mesma queda de retenção antes dos 3 segundos.</p>
+        <p>Você troca criativo, troca copy, troca thumb, e o resultado é o mesmo CPL alto, mesma queda de retenção antes dos 3 segundos.</p>
       </div>
       <div class="pain reveal">
         <div class="pain-icon">🕐</div>
         <div class="pain-title">Horas perdidas pra produzir um anúncio.</div>
-        <p>Reunião com agência, briefing, revisão, aprovação — e ainda pode não converter. Mais semanas perdidas que budget gasto.</p>
+        <p>Reunião com agência, briefing, revisão, aprovação, e ainda pode não converter. Mais semanas perdidas que budget gasto.</p>
       </div>
       <div class="pain reveal">
         <div class="pain-icon">💸</div>
@@ -934,12 +957,12 @@ footer {
       <div class="pain reveal">
         <div class="pain-icon">🔁</div>
         <div class="pain-title">Sempre os mesmos formatos.</div>
-        <p>Talking head, depoimento, produto na mão — sem ângulos novos que prendam atenção. Seu feed parece o feed de qualquer um.</p>
+        <p>Talking head, depoimento, produto na mão, sem ângulos novos que prendam atenção. Seu feed parece o feed de qualquer um.</p>
       </div>
     </div>
 
     <div class="problem-stmt reveal">
-      O problema não é falta de criatividade. É falta de <strong>estrutura validada</strong> — ângulos, formatos e ganchos que já provaram que funcionam, adaptados pro seu negócio.
+      O problema não é falta de criatividade. É falta de <strong>estrutura validada</strong>, ângulos, formatos e ganchos que já provaram que funcionam, adaptados pro seu negócio.
     </div>
   </div>
 </section>
@@ -959,7 +982,7 @@ footer {
         <div class="step-body">
           <div class="step-tag">Briefing</div>
           <h3>Você responde 8 perguntas</h3>
-          <p>Produto, público, dor, solução, prova, estilo de gravação, ângulo e tom. Tudo que a IA precisa pra calibrar os roteiros pro seu cenário específico — sem campo em branco inútil.</p>
+          <p>Produto, público, dor, solução, prova, estilo de gravação, ângulo e tom. Tudo que a IA precisa pra calibrar os roteiros pro seu cenário específico, sem campo em branco inútil.</p>
         </div>
       </div>
       <div class="step reveal">
@@ -967,7 +990,7 @@ footer {
         <div class="step-body">
           <div class="step-tag">Análise</div>
           <h3>A IA escolhe os formatos certos</h3>
-          <p>O motor analisa seu público, nível de consciência e estilo — e seleciona os 3 formatos com maior potencial de conversão pra esse contexto. Você não precisa saber quais são. Ela sabe.</p>
+          <p>O motor analisa seu público, nível de consciência e estilo, e seleciona os 3 formatos com maior potencial de conversão pra esse contexto. Você não precisa saber quais são. Ela sabe.</p>
         </div>
       </div>
       <div class="step reveal">
@@ -983,7 +1006,7 @@ footer {
         <div class="step-body">
           <div class="step-tag">Gravação</div>
           <h3>Aperta REC e publica</h3>
-          <p>Sem depender de agência, copywriter ou gestor. Os roteiros cabem em qualquer formato de anúncio — Reels, Stories, TikTok, YouTube Shorts.</p>
+          <p>Sem depender de agência, copywriter ou gestor. Os roteiros cabem em qualquer formato de anúncio: Reels, Stories, TikTok, YouTube Shorts.</p>
         </div>
       </div>
     </div>
@@ -999,8 +1022,9 @@ footer {
     <h2 class="reveal">O que aconteceu com quem <em>já apertou REC.</em></h2>
 
     <div class="testimonial reveal">
+      <div class="test-accent-bar"></div>
       <div class="test-quote">Ferramenta sensacional. Trabalho criando roteiros semanalmente para meus clientes e para mim mesmo. A ferramenta conseguiu gerar roteiros que realmente dão resultado. Um dos roteiros que fiz já me trouxe <strong style="color:var(--ac);font-style:italic;font-weight:400">+R$1.000 em tráfego.</strong></div>
-      <div class="test-person">
+      <div class="test-person" style="position:relative;z-index:1;">
         <strong>Gestor de tráfego</strong>
         <span class="test-badge">Plano Agências</span>
       </div>
@@ -1024,7 +1048,7 @@ footer {
         <div class="plan-period">por mês</div>
         <ul class="plan-features">
           <li><strong>Acesso completo</strong> à ferramenta</li>
-          <li><strong>4 gerações</strong> por mês — 24 roteiros prontos</li>
+          <li><strong>4 gerações</strong> por mês, 24 roteiros prontos</li>
           <li>3 formatos validados por geração</li>
           <li>Fala + direção visual + checklist</li>
           <li>Download em PDF</li>
@@ -1041,7 +1065,7 @@ footer {
         <div class="plan-period">por mês</div>
         <ul class="plan-features">
           <li><strong>Tudo do Essencial</strong></li>
-          <li><strong>15 gerações</strong> por mês — 90 roteiros</li>
+          <li><strong>15 gerações</strong> por mês, 90 roteiros</li>
           <li>Volume para múltiplos clientes</li>
           <li>Roteiros personalizados por briefing</li>
           <li>Instrução de câmera, tom e edição incluídas</li>
@@ -1065,27 +1089,27 @@ footer {
     <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q">Preciso saber escrever copy pra usar?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><div>Não. Você responde 8 perguntas sobre seu produto e público — a IA cuida do resto. O roteiro já vem com fala completa, pronto pra gravar. Sem conhecimento técnico necessário.</div></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><div>Não. Você responde 8 perguntas sobre seu produto e público, a IA cuida do resto. O roteiro já vem com fala completa, pronto pra gravar. Sem conhecimento técnico necessário.</div></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-q">Funciona pra qualquer nicho?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><div>Sim. Os roteiros são calibrados com base nas suas respostas — produto, público, tom e estilo. Já foi usado em infoprodutos, serviços locais, e-commerce, SaaS e mentorias.</div></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><div>Sim. Os roteiros são calibrados com base nas suas respostas, produto, público, tom e estilo. Já foi usado em infoprodutos, serviços locais, e-commerce, SaaS e mentorias.</div></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-q">Já tentei IA antes e não funcionou. Por que seria diferente?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><div>Porque o problema não é a IA — é que você não sabia quais perguntas fazer. O CRIATIVO.AI faz as perguntas certas antes de gerar qualquer coisa. O briefing de 8 perguntas é o que separa um roteiro genérico de um que parece Reel.</div></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><div>Porque o problema não é a IA, é que você não sabia quais perguntas fazer. O CRIATIVO.AI faz as perguntas certas antes de gerar qualquer coisa. O briefing de 8 perguntas é o que separa um roteiro genérico de um que parece Reel.</div></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-q">Quanto tempo leva pra gerar os roteiros?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><div>Em média 60 segundos após o briefing. Você sai com 6 roteiros completos — fala, visual e instruções de gravação. Não tem reunião, não tem aprovação, não tem espera.</div></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><div>Em média 60 segundos após o briefing. Você sai com 6 roteiros completos, fala, visual e instruções de gravação. Não tem reunião, não tem aprovação, não tem espera.</div></div></div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-q">Posso usar pra mais de um cliente?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><div>O plano Agências foi feito pra isso — 15 gerações mensais, volume suficiente pra atender múltiplos clientes. Cada geração é um briefing diferente, então os roteiros são sempre personalizados pro produto e público de cada cliente.</div></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><div>O plano Agências foi feito pra isso, 15 gerações mensais, volume suficiente pra atender múltiplos clientes. Cada geração é um briefing diferente, então os roteiros são sempre personalizados pro produto e público de cada cliente.</div></div></div>
       </div>
 
       <div class="faq-item reveal">
@@ -1102,7 +1126,7 @@ footer {
 <section class="cta-final">
   <div class="wrap">
     <h2 class="reveal">Pronto pra apertar <span class="rec"><span class="rec-dot"></span>REC?</span></h2>
-    <p class="reveal">Do briefing ao roteiro filmável em menos de 60 segundos. Com os formatos que já geraram R$7M em faturamento — adaptados pro seu produto, público e tom.</p>
+    <p class="reveal">Do briefing ao roteiro filmável em menos de 60 segundos. Com os formatos que já geraram 7 milhões de reais em faturamento, adaptados pro seu produto, público e tom.</p>
     <a href="#planos" class="btn btn-primary reveal">Quero meus roteiros agora →</a>
     <div class="cta-final-micro reveal">Acesso imediato após o pagamento · Cancele quando quiser</div>
   </div>
