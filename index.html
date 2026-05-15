@@ -3,617 +3,798 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Roteiros de anúncio em vídeo gerados por IA — com base nos formatos que já geraram R$7M em faturamento. 8 perguntas. 60 segundos. 6 roteiros prontos pra gravar.">
+<meta name="theme-color" content="#080808">
+<meta property="og:title" content="CRIATIVO.AI — Roteiros que vendem">
+<meta property="og:description" content="Os formatos que já geraram milhões. Adaptados pro seu negócio em 60 segundos.">
+<meta property="og:type" content="website">
 <title>CRIATIVO.AI — Roteiros que vendem</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
 :root {
-  --bg: #080808;
-  --bg2: #111111;
-  --bg3: #181818;
-  --ink: #f0ece0;
-  --dim: #7a7670;
-  --mute: #3a3830;
-  --ac: #d9ff00;
-  --warm: #ff5c1a;
-  --line: #1e1e1e;
-  --serif: 'Fraunces', Georgia, serif;
-  --mono: 'JetBrains Mono', monospace;
+  /* Surfaces */
+  --bg-0: #080808;          /* deep page background */
+  --bg-1: #0f0f0f;          /* near-bg */
+  --bg-2: #141414;          /* card surface */
+  --bg-3: #1a1a1a;          /* elevated */
+
+  /* Text */
+  --ink:  #F2EDE4;          /* primary warm off-white */
+  --ink-2:#B9B3A5;          /* secondary */
+  --dim:  #6E6A60;          /* dim */
+  --mute: #3A3830;          /* muted */
+
+  /* Lines */
+  --line:    #1E1E1E;
+  --line-2:  #262626;
+
+  /* Accent — acid yellow performance */
+  --ac:      #D4F70E;
+  --ac-soft: rgba(212,247,14,.16);
+  --ac-glow: rgba(212,247,14,.35);
+
+  /* Signal */
+  --warm: #FF5C1A;          /* recording red-orange (used sparingly) */
+
+  /* Type */
+  --serif: 'DM Serif Display', 'Times New Roman', serif;
+  --sans:  'Figtree', system-ui, -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', 'SF Mono', Menlo, monospace;
+
+  /* Layout */
+  --wrap-max: 1180px;
+  --pad-x: clamp(20px, 4vw, 48px);
+
+  /* Motion */
+  --ease: cubic-bezier(.2, .8, .2, 1);
 }
 
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
 
 body {
-  background: var(--bg);
+  background: var(--bg-0);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
+/* Subtle dot grid background */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.012) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.018) 1px, transparent 0);
   background-size: 4px 4px;
   pointer-events: none;
   z-index: 0;
 }
 
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
 
-/* NAV */
+.wrap {
+  max-width: var(--wrap-max);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   UTILITY: section tag + headings
+   ============================================================ */
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--ac);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.sec-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--ac);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--ac-glow);
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.05;
+}
+h1 em, h2 em, h3 em { font-style: italic; color: var(--ac); }
+h1 strong, h2 strong, h3 strong { font-weight: 400; }
+
+p { color: var(--ink-2); }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 18px 28px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+  white-space: nowrap;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ac);
+  transform: translateX(-101%);
+  transition: transform .35s var(--ease);
+  z-index: -1;
+}
+.btn-primary {
+  background: var(--ac);
+  color: var(--bg-0);
+}
+.btn-primary::before { background: var(--ink); }
+.btn-primary:hover { color: var(--bg-0); }
+.btn-primary:hover::before { transform: translateX(0); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-secondary::before { background: var(--bg-2); }
+.btn-secondary:hover { color: var(--ac); border-color: var(--ac); }
+.btn-secondary:hover::before { transform: translateX(0); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 20px 0;
-  background: rgba(8,8,8,.9);
-  backdrop-filter: blur(16px);
+  padding: 18px 0;
+  background: rgba(8, 8, 8, .72);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid var(--line);
 }
 .nav-inner { display: flex; justify-content: space-between; align-items: center; }
 .logo {
   font-family: var(--mono);
   font-size: 13px;
+  font-weight: 600;
   letter-spacing: .18em;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  color: var(--ink);
 }
 .dot {
   width: 8px; height: 8px;
   background: var(--ac);
   border-radius: 50%;
-  box-shadow: 0 0 16px var(--ac);
-  animation: pulse 2.5s ease-in-out infinite;
+  box-shadow: 0 0 14px var(--ac-glow);
+  animation: pulse 2.4s ease-in-out infinite;
 }
 @keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:.5; transform:scale(.8); }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .45; transform: scale(.78); }
 }
-.logo-ai { color: var(--ac); }
+.logo .ai { color: var(--ac); }
 .nav-cta {
   font-family: var(--mono);
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: .15em;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 11px 20px;
   background: var(--ac);
-  color: var(--bg);
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all .2s;
+  color: var(--bg-0);
+  transition: background .25s var(--ease), color .25s var(--ease);
 }
-.nav-cta:hover { background: var(--ink); }
+.nav-cta:hover { background: var(--ink); color: var(--bg-0); }
 
-/* HERO */
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero {
-  padding: 160px 0 100px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 140px 0 100px;
   border-bottom: 1px solid var(--line);
   position: relative;
-  overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -200px; right: -300px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(217,255,0,.06) 0%, transparent 70%);
-  pointer-events: none;
 }
 .hero-tag {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: .3em;
-  color: var(--ac);
+  letter-spacing: .25em;
+  color: var(--dim);
   text-transform: uppercase;
+  margin-bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-tag::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--dim);
+}
+.hero h1 {
+  font-size: clamp(44px, 7.4vw, 96px);
+  letter-spacing: -.03em;
+  margin-bottom: 28px;
+  max-width: 1000px;
+}
+.hero-sub {
+  font-family: var(--sans);
+  font-size: clamp(17px, 1.4vw, 21px);
+  color: var(--ink-2);
+  line-height: 1.55;
+  margin-bottom: 44px;
+  max-width: 680px;
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 80px;
+}
+
+/* Stats dashboard strip */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding-top: 36px;
+  border-top: 1px solid var(--line-2);
+  max-width: 880px;
+}
+.stat {
+  padding: 0 24px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.stat:first-child { padding-left: 0; }
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--mono);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.stat-num .unit {
+  font-size: .55em;
+  color: var(--ac);
+  font-weight: 600;
+}
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--dim);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Hero stagger reveal */
+.reveal-stagger > * { opacity: 0; transform: translateY(18px); }
+.reveal-stagger.in > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 100ms; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 220ms; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 340ms; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 460ms; }
+
+/* ============================================================
+   SECTIONS — shared scaffold
+   ============================================================ */
+section {
+  padding: clamp(80px, 11vw, 140px) 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+section h2 {
+  font-size: clamp(34px, 4.6vw, 58px);
+  margin-bottom: 22px;
+  max-width: 920px;
+}
+section > .wrap > p.sec-sub {
+  font-size: clamp(16px, 1.2vw, 19px);
+  color: var(--ink-2);
+  max-width: 680px;
+  margin-bottom: 60px;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   PROBLEM
+   ============================================================ */
+.pains {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 60px;
+}
+.pain {
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  padding: 36px 32px;
+  position: relative;
+  transition: border-color .35s var(--ease), transform .35s var(--ease);
+}
+.pain::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 28px;
+  height: 1px;
+  background: var(--ac);
+  transition: width .4s var(--ease);
+}
+.pain:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.pain:hover::before { width: 100%; }
+.pain-icon {
+  font-size: 24px;
+  margin-bottom: 22px;
+  filter: grayscale(.3);
+}
+.pain-title {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -.005em;
+}
+.pain p {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+.problem-stmt {
+  margin-top: 60px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 900px;
+  letter-spacing: -.015em;
+  padding-left: 24px;
+  border-left: 2px solid var(--ac);
+}
+.problem-stmt strong { color: var(--ac); font-weight: 400; font-style: italic; }
+
+/* ============================================================
+   HOW IT WORKS — vertical timeline
+   ============================================================ */
+.steps {
+  margin-top: 60px;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 35px;
+  width: 1px;
+  background: var(--line-2);
+}
+.step {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  align-items: flex-start;
+  position: relative;
+}
+.step + .step { border-top: 1px dashed var(--line); }
+.step-num {
+  font-family: var(--mono);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 500;
+  color: var(--dim);
+  line-height: 1;
+  letter-spacing: -.02em;
+  position: relative;
+  transition: color .4s var(--ease), text-shadow .4s var(--ease);
+}
+.step.in .step-num,
+.step:hover .step-num {
+  color: var(--ac);
+  text-shadow: 0 0 24px var(--ac-glow);
+}
+.step-body { padding-top: 8px; }
+.step-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.step h3 {
+  font-size: clamp(22px, 2.2vw, 28px);
+  margin-bottom: 12px;
+  color: var(--ink);
+  letter-spacing: -.015em;
+}
+.step p {
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 640px;
+}
+
+/* ============================================================
+   TESTIMONIAL
+   ============================================================ */
+.testimonial {
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  padding: clamp(48px, 7vw, 80px) clamp(36px, 6vw, 72px);
+  margin-top: 50px;
+  position: relative;
+}
+.testimonial::before {
+  content: '"';
+  position: absolute;
+  top: 4px;
+  left: 24px;
+  font-family: var(--serif);
+  font-size: 220px;
+  color: var(--ac);
+  line-height: 1;
+  font-style: italic;
+  pointer-events: none;
+}
+.test-quote {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.4;
+  color: var(--ink);
+  letter-spacing: -.015em;
   margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+.test-person {
   display: flex;
   align-items: center;
   gap: 14px;
-  opacity: 0;
-  animation: fadeUp .8s ease .1s forwards;
-}
-.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--ac); }
-
-.hero h1 {
-  font-weight: 200;
-  font-size: clamp(48px, 8vw, 96px);
-  line-height: .95;
-  letter-spacing: -.04em;
-  margin-bottom: 36px;
-  max-width: 900px;
-  opacity: 0;
-  animation: fadeUp .8s ease .2s forwards;
-}
-.hero h1 em { font-style: italic; font-weight: 300; color: var(--ac); }
-.hero h1 strong { font-weight: 700; font-style: normal; }
-
-.hero-sub {
-  font-size: 20px;
-  color: var(--dim);
-  max-width: 600px;
-  line-height: 1.55;
-  font-weight: 300;
-  margin-bottom: 56px;
-  opacity: 0;
-  animation: fadeUp .8s ease .3s forwards;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp .8s ease .4s forwards;
-}
-.btn-primary {
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: .18em;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  padding: 18px 36px;
+  color: var(--dim);
+}
+.test-person strong { color: var(--ink); font-weight: 600; }
+.test-person::before {
+  content: '';
+  width: 30px;
+  height: 1px;
   background: var(--ac);
-  color: var(--bg);
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transition: all .25s;
 }
-.btn-primary:hover { background: var(--ink); transform: translateX(3px); }
-.btn-secondary {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  padding: 18px 36px;
-  background: transparent;
-  color: var(--dim);
-  border: 1px solid var(--mute);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  transition: all .25s;
-}
-.btn-secondary:hover { color: var(--ink); border-color: var(--dim); }
-
-.hero-proof {
-  margin-top: 72px;
-  padding-top: 40px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  gap: 64px;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp .8s ease .5s forwards;
-}
-.proof-n { font-size: 42px; font-weight: 600; letter-spacing: -.03em; color: var(--ac); }
-.proof-l { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; margin-top: 4px; }
-
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to { opacity:1; transform:translateY(0); }
-}
-
-/* PROBLEM */
-.problem {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-}
-.sec-tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .3em;
-  color: var(--dim);
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.sec-tag::before { content: ''; width: 20px; height: 1px; background: var(--dim); }
-.problem h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 60px);
-  line-height: 1.05;
-  letter-spacing: -.03em;
-  margin-bottom: 48px;
-  max-width: 800px;
-}
-.problem h2 em { font-style: italic; color: var(--warm); }
-
-.pains {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2px;
-  margin-bottom: 64px;
-}
-.pain {
-  background: var(--bg2);
-  padding: 32px;
-  border-left: 3px solid var(--warm);
-}
-.pain-icon { font-size: 24px; margin-bottom: 16px; }
-.pain p { font-size: 16px; color: var(--dim); line-height: 1.6; }
-.pain strong { color: var(--ink); }
-
-.problem-stmt {
-  background: var(--bg2);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--ac);
-  padding: 36px 40px;
-  font-size: 20px;
-  font-style: italic;
-  color: var(--dim);
-  line-height: 1.6;
-  max-width: 760px;
-}
-.problem-stmt strong { color: var(--ac); font-style: normal; }
-
-/* HOW IT WORKS */
-.how {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-}
-.how h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 60px);
-  line-height: 1.05;
-  letter-spacing: -.03em;
-  margin-bottom: 72px;
-}
-.how h2 em { font-style: italic; color: var(--ac); }
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2px;
-}
-.step {
-  background: var(--bg2);
-  padding: 40px 36px;
-  position: relative;
-  overflow: hidden;
-  transition: all .3s;
-}
-.step:hover { background: var(--bg3); transform: translateY(-4px); }
-.step::before {
-  content: attr(data-n);
-  position: absolute;
-  top: -20px; right: 20px;
-  font-family: var(--mono);
-  font-size: 80px;
-  font-weight: 700;
-  color: rgba(217,255,0,.04);
-  line-height: 1;
-  pointer-events: none;
-}
-.step-n {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .2em;
-  color: var(--ac);
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.step h3 {
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 14px;
-  letter-spacing: -.01em;
-}
-.step p { font-size: 15px; color: var(--dim); line-height: 1.6; }
-
-/* RESULT */
-.result-sec {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg2);
-}
-.result-sec h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 60px);
-  line-height: 1.05;
-  letter-spacing: -.03em;
-  margin-bottom: 16px;
-}
-.result-sec h2 em { font-style: italic; color: var(--ac); }
-.result-sub { color: var(--dim); font-size: 18px; margin-bottom: 72px; max-width: 560px; }
-
-.formats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2px;
-  margin-bottom: 64px;
-}
-.format {
-  background: var(--bg);
-  padding: 32px;
-  border-top: 2px solid var(--ac);
-  transition: all .3s;
-}
-.format:hover { transform: translateY(-3px); }
-.format-name {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .2em;
-  color: var(--ac);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.format h4 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
-.format p { font-size: 14px; color: var(--dim); line-height: 1.55; }
-
-.result-note {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--dim);
-  letter-spacing: .05em;
-  padding: 20px 28px;
-  background: var(--bg);
-  border: 1px solid var(--line);
+.test-badge {
   display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid var(--ac);
+  color: var(--ac);
+  font-size: 10px;
+  letter-spacing: .18em;
+  margin-left: 8px;
 }
-.result-note strong { color: var(--ac); }
 
-/* TESTIMONIAL */
-.testimonial-sec {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-}
-.testimonial-sec h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 4vw, 52px);
-  letter-spacing: -.03em;
-  margin-bottom: 64px;
-}
-.testimonial-sec h2 em { font-style: italic; color: var(--ac); }
-
-.testimonial {
-  background: var(--bg2);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--ac);
-  padding: 48px;
-  max-width: 760px;
-  margin-bottom: 32px;
-}
-.test-quote {
-  font-size: 22px;
-  font-style: italic;
-  line-height: 1.5;
-  margin-bottom: 28px;
-  color: var(--ink);
-}
-.test-quote::before { content: '"'; color: var(--ac); font-size: 32px; }
-.test-quote::after { content: '"'; color: var(--ac); font-size: 32px; }
-.test-person { font-family: var(--mono); font-size: 12px; color: var(--dim); letter-spacing: .1em; }
-.test-person strong { color: var(--ac); }
-
-.test-placeholder {
-  background: var(--bg2);
-  border: 1px dashed var(--mute);
-  padding: 48px;
-  max-width: 760px;
-  text-align: center;
-}
-.test-placeholder p { font-family: var(--mono); font-size: 12px; color: var(--mute); letter-spacing: .1em; }
-
-/* PRICING */
-.pricing {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg2);
-}
-.pricing h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 60px);
-  letter-spacing: -.03em;
-  margin-bottom: 16px;
-}
-.pricing h2 em { font-style: italic; color: var(--ac); }
-.pricing-sub { color: var(--dim); font-size: 18px; margin-bottom: 72px; }
-
+/* ============================================================
+   PRICING
+   ============================================================ */
 .plans {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 60px;
 }
 .plan {
-  background: var(--bg);
-  padding: 48px 40px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  padding: 44px 36px 36px;
   position: relative;
-  transition: all .3s;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
 }
-.plan:hover { transform: translateY(-4px); }
-.plan.featured {
-  background: var(--bg3);
-  border: 1px solid rgba(217,255,0,.3);
+.plan:hover {
+  border-color: var(--ac);
+  transform: translateY(-3px) scale(1.005);
+  box-shadow: 0 0 0 1px var(--ac-soft), 0 30px 60px -20px rgba(212, 247, 14, .12);
 }
+.plan.featured { border-color: var(--mute); background: linear-gradient(180deg, #181610 0%, var(--bg-2) 60%); }
 .plan-badge {
+  position: absolute;
+  top: -1px;
+  right: 24px;
+  transform: translateY(-50%);
+  background: var(--ac);
+  color: var(--bg-0);
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  background: var(--ac);
-  color: var(--bg);
-  padding: 4px 12px;
-  display: inline-block;
-  margin-bottom: 24px;
   font-weight: 700;
+  letter-spacing: .18em;
+  padding: 7px 14px;
+  text-transform: uppercase;
 }
 .plan-name {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .2em;
-  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--ac);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 .plan-price {
-  font-size: 56px;
-  font-weight: 200;
-  letter-spacing: -.04em;
+  font-family: var(--serif);
+  font-size: clamp(64px, 8vw, 88px);
   color: var(--ink);
-  margin-bottom: 4px;
-  line-height: 1;
+  line-height: .9;
+  letter-spacing: -.04em;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
 }
-.plan-price span { font-size: 22px; color: var(--dim); }
+.plan-price .currency {
+  font-size: .42em;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-weight: 500;
+  padding-top: 12px;
+  letter-spacing: 0;
+}
 .plan-period {
   font-family: var(--mono);
   font-size: 11px;
+  letter-spacing: .18em;
   color: var(--dim);
-  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: 12px;
   margin-bottom: 36px;
 }
 .plan-features {
   list-style: none;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
+  flex-grow: 1;
 }
 .plan-features li {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
   font-size: 15px;
-  color: var(--dim);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  color: var(--ink-2);
+  padding: 13px 0;
+  padding-left: 28px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  line-height: 1.45;
 }
-.plan-features li::before { content: '✓'; color: var(--ac); font-weight: 700; flex-shrink: 0; }
-.plan-features li strong { color: var(--ink); }
+.plan-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 19px;
+  width: 14px;
+  height: 8px;
+  border-left: 1.5px solid var(--ac);
+  border-bottom: 1.5px solid var(--ac);
+  transform: rotate(-45deg);
+}
+.plan-features li strong { color: var(--ink); font-weight: 600; }
+.plan-features li:last-child { border-bottom: none; }
 .plan-cta {
-  display: block;
-  width: 100%;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  padding: 18px;
-  background: var(--ac);
-  color: var(--bg);
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-  text-align: center;
-  transition: all .25s;
-}
-.plan-cta:hover { background: var(--ink); }
-.plan-cta.outline {
-  background: transparent;
-  color: var(--dim);
-  border: 1px solid var(--mute);
-}
-.plan-cta.outline:hover { color: var(--ink); border-color: var(--dim); background: transparent; }
-
-/* FAQ */
-.faq {
-  padding: 120px 0;
-  border-bottom: 1px solid var(--line);
-}
-.faq h2 {
-  font-weight: 300;
-  font-size: clamp(36px, 5vw, 56px);
-  letter-spacing: -.03em;
-  margin-bottom: 64px;
-}
-.faq h2 em { font-style: italic; color: var(--ac); }
-
-.faq-item {
-  border-bottom: 1px solid var(--line);
-}
-.faq-q {
-  width: 100%;
-  background: transparent;
-  border: none;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 400;
-  text-align: left;
-  padding: 28px 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  transition: color .2s;
-}
-.faq-q:hover { color: var(--ac); }
-.faq-icon {
-  width: 32px; height: 32px;
-  border: 1px solid var(--mute);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  background: transparent;
   color: var(--ac);
-  flex-shrink: 0;
-  transition: all .3s;
-  font-weight: 300;
-}
-.faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--ac); }
-.faq-a {
-  display: none;
-  padding: 0 0 28px;
-  color: var(--dim);
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 720px;
-}
-.faq-item.open .faq-a { display: block; }
-
-/* CTA FINAL */
-.cta-final {
-  padding: 140px 0;
-  text-align: center;
+  border: 1px solid var(--ac);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
   position: relative;
   overflow: hidden;
+  transition: color .25s var(--ease);
 }
-.cta-final::before {
+.plan-cta::before {
   content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px; height: 400px;
-  background: radial-gradient(ellipse, rgba(217,255,0,.08) 0%, transparent 70%);
-  pointer-events: none;
+  position: absolute; inset: 0;
+  background: var(--ac);
+  transform: translateX(-101%);
+  transition: transform .35s var(--ease);
+  z-index: -1;
+}
+.plan-cta:hover { color: var(--bg-0); }
+.plan-cta:hover::before { transform: translateX(0); }
+
+.plan.featured .plan-cta {
+  background: var(--ac);
+  color: var(--bg-0);
+}
+.plan.featured .plan-cta::before { background: var(--ink); }
+.plan.featured .plan-cta:hover { color: var(--bg-0); }
+
+.plan-microcopy {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--dim);
+  margin-top: 16px;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list { margin-top: 60px; }
+.faq-item {
+  border-bottom: 1px solid var(--line-2);
+}
+.faq-item:first-child { border-top: 1px solid var(--line-2); }
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 400;
+  color: var(--ink);
+  padding: 28px 0;
+  letter-spacing: -.01em;
+  transition: color .25s var(--ease);
+}
+.faq-q:hover { color: var(--ac); }
+.faq-icon {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--ac);
+  margin-left: 24px;
+  flex-shrink: 0;
+  transition: transform .4s var(--ease);
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+.faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .4s var(--ease);
+}
+.faq-a-inner {
+  overflow: hidden;
+}
+.faq-a-inner > div {
+  padding: 0 0 28px;
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  max-width: 760px;
+}
+.faq-item.open .faq-a { grid-template-rows: 1fr; }
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.cta-final {
+  text-align: center;
+  background: radial-gradient(ellipse at center top, rgba(212,247,14,.06) 0%, transparent 60%);
 }
 .cta-final h2 {
-  font-weight: 200;
-  font-size: clamp(44px, 7vw, 88px);
+  font-size: clamp(48px, 8vw, 110px);
+  letter-spacing: -.035em;
+  margin: 0 auto 32px;
+  max-width: 900px;
   line-height: .95;
-  letter-spacing: -.04em;
-  margin-bottom: 24px;
 }
-.cta-final h2 em { font-style: italic; color: var(--ac); }
+.cta-final h2 .rec {
+  font-style: italic;
+  color: var(--ac);
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+.cta-final h2 .rec-dot {
+  width: 18px;
+  height: 18px;
+  background: var(--warm);
+  border-radius: 50%;
+  box-shadow: 0 0 24px var(--warm);
+  animation: rec-pulse 1.4s ease-in-out infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+@keyframes rec-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .35; transform: scale(.75); }
+}
 .cta-final p {
-  color: var(--dim);
-  font-size: 18px;
-  margin-bottom: 48px;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  font-family: var(--sans);
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--ink-2);
+  max-width: 580px;
+  margin: 0 auto 48px;
+  line-height: 1.55;
 }
-.cta-final .btn-primary { font-size: 13px; padding: 20px 48px; }
+.cta-final .btn-primary {
+  padding: 22px 36px;
+  font-size: 13px;
+}
+.cta-final-micro {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--dim);
+}
 
-/* FOOTER */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 footer {
-  border-top: 1px solid var(--line);
-  padding: 40px 0;
+  padding: 50px 0 70px;
+  border-bottom: none;
 }
 .footer-inner {
   display: flex;
@@ -622,266 +803,425 @@ footer {
   flex-wrap: wrap;
   gap: 16px;
 }
-.footer-logo { font-family: var(--mono); font-size: 13px; letter-spacing: .15em; display: flex; align-items: center; gap: 8px; }
-.footer-logo .ai { color: var(--ac); }
-.footer-copy { font-family: var(--mono); font-size: 10px; color: var(--mute); letter-spacing: .1em; }
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: .08em;
+}
 
-@media (max-width: 720px) {
-  .wrap { padding: 0 20px; }
-  .hero { padding: 120px 0 80px; }
-  .hero-proof { gap: 32px; }
-  .pains, .steps, .formats, .plans { grid-template-columns: 1fr; }
-  .hero-ctas { flex-direction: column; }
-  .btn-primary, .btn-secondary { justify-content: center; }
-  .testimonial, .test-placeholder { padding: 32px 24px; }
-  .plan { padding: 36px 28px; }
-  .nav-cta { display: none; }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 880px) {
+  .hero { padding: 120px 0 80px; min-height: auto; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { justify-content: center; }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 0;
+  }
+  .stat {
+    padding: 0 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  .stat:nth-child(2) { border-right: none; padding-right: 0; }
+  .stat:nth-child(1) { padding-left: 0; }
+  .stat:nth-child(3) { padding-left: 0; border-bottom: none; padding-bottom: 0; padding-top: 24px; }
+  .stat:nth-child(4) { border-right: none; padding-right: 0; border-bottom: none; padding-bottom: 0; padding-top: 24px; }
+
+  .pains { grid-template-columns: 1fr; }
+  .plans { grid-template-columns: 1fr; }
+  .plan { padding: 36px 28px 28px; }
+  .plan.featured .plan-badge { right: 50%; transform: translate(50%, -50%); }
+
+  .steps::before { left: 24px; }
+  .step { grid-template-columns: 64px 1fr; gap: 18px; }
+
+  .testimonial::before { font-size: 140px; top: 10px; left: 14px; }
+  .test-quote { font-size: 20px; }
+}
+
+@media (max-width: 540px) {
+  .nav-cta { padding: 9px 14px; font-size: 10px; }
+  .hero-tag { font-size: 10px; margin-bottom: 28px; }
+  .pain { padding: 28px 24px; }
+}
+
+/* Honor user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
 <body>
 
+<!-- ============================================================
+     NAV
+     ============================================================ -->
 <nav>
   <div class="wrap nav-inner">
     <div class="logo">
       <span class="dot"></span>
-      CRIATIVO<span class="logo-ai">.AI</span>
+      CRIATIVO<span class="ai">.AI</span>
     </div>
     <a href="#planos" class="nav-cta">Começar agora →</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <section class="hero">
-  <div class="wrap">
-    <div class="hero-tag">Roteiros de anúncios com IA</div>
-    <h1>Os formatos que já geraram <em>milhões.</em> Agora adaptados pro <strong>seu negócio.</strong></h1>
-    <p class="hero-sub">Os mesmos ângulos e estruturas que já geraram milhões em faturamento — agora disponíveis pra qualquer negócio, sem agência, sem copywriter, sem achismo.</p>
+  <div class="wrap reveal-stagger" id="hero-stagger">
+    <div class="hero-tag">Roteiros de anúncio com IA</div>
+    <h1>Roteiros que parecem <em>Reels.</em><br>Resultado que parece <strong><em>mágica.</em></strong></h1>
+    <p class="hero-sub">Chega de copiar prompt no ChatGPT e receber texto com cara de anúncio. O CRIATIVO.AI usa os formatos que já geraram R$7M em faturamento — e adapta pra você gravar hoje.</p>
     <div class="hero-ctas">
-      <a href="#planos" class="btn-primary">Quero meus roteiros →</a>
-      <a href="#como-funciona" class="btn-secondary">Ver como funciona</a>
+      <a href="#planos" class="btn btn-primary">Quero meus roteiros →</a>
+      <a href="#como-funciona" class="btn btn-secondary">Ver como funciona</a>
     </div>
-    <div class="hero-proof">
-      <div>
-        <div class="proof-n">6</div>
-        <div class="proof-l">Roteiros por geração</div>
+    <div class="stats" id="stats">
+      <div class="stat">
+        <div class="stat-num"><span data-counter="6">0</span></div>
+        <div class="stat-label">Roteiros por geração</div>
       </div>
-      <div>
-        <div class="proof-n">≤45s</div>
-        <div class="proof-l">Duração de cada roteiro</div>
+      <div class="stat">
+        <div class="stat-num"><span data-counter="45">0</span><span class="unit">s</span></div>
+        <div class="stat-label">Duração de cada</div>
       </div>
-      <div>
-        <div class="proof-n">~60s</div>
-        <div class="proof-l">Pra gerar tudo</div>
+      <div class="stat">
+        <div class="stat-num"><span data-counter="60">0</span><span class="unit">s</span></div>
+        <div class="stat-label">Pra gerar tudo</div>
       </div>
-      <div>
-        <div class="proof-n">8</div>
-        <div class="proof-l">Perguntas no briefing</div>
+      <div class="stat">
+        <div class="stat-num"><span data-counter="8">0</span></div>
+        <div class="stat-label">Perguntas no briefing</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
+<!-- ============================================================
+     PROBLEM
+     ============================================================ -->
 <section class="problem">
   <div class="wrap">
-    <div class="sec-tag">O problema</div>
-    <h2>Criativos que morrem em 7 dias <em>não são azar.</em> São estrutura errada.</h2>
+    <div class="sec-tag reveal">O problema</div>
+    <h2 class="reveal">Criativos que morrem em 7 dias <em>não são azar.</em> São estrutura errada.</h2>
+    <p class="sec-sub reveal">Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo. O problema não é falta de ideia. É falta de estrutura validada.</p>
+
     <div class="pains">
-      <div class="pain">
+      <div class="pain reveal">
         <div class="pain-icon">📉</div>
-        <p><strong>Performance cai toda semana.</strong> Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo.</p>
+        <div class="pain-title">Performance cai toda semana.</div>
+        <p>Você troca criativo, troca copy, troca thumb — e o resultado é o mesmo CPL alto, mesma queda de retenção antes dos 3 segundos.</p>
       </div>
-      <div class="pain">
+      <div class="pain reveal">
         <div class="pain-icon">🕐</div>
-        <p><strong>Horas perdidas pra produzir um anúncio.</strong> Reunião com agência, briefing, revisão, aprovação — e ainda pode não converter.</p>
+        <div class="pain-title">Horas perdidas pra produzir um anúncio.</div>
+        <p>Reunião com agência, briefing, revisão, aprovação — e ainda pode não converter. Mais semanas perdidas que budget gasto.</p>
       </div>
-      <div class="pain">
+      <div class="pain reveal">
         <div class="pain-icon">💸</div>
-        <p><strong>Budget indo embora.</strong> Tráfego pago caro demais pra testar na base do achismo sem estrutura comprovada.</p>
+        <div class="pain-title">Budget indo embora.</div>
+        <p>Tráfego pago caro demais pra testar na base do achismo. Cada criativo que falha custa o equivalente a meses de assinatura.</p>
       </div>
-      <div class="pain">
+      <div class="pain reveal">
         <div class="pain-icon">🔁</div>
-        <p><strong>Sempre os mesmos formatos.</strong> Talking head, depoimento, produto na mão — sem ângulos novos que prendam a atenção.</p>
+        <div class="pain-title">Sempre os mesmos formatos.</div>
+        <p>Talking head, depoimento, produto na mão — sem ângulos novos que prendam atenção. Seu feed parece o feed de qualquer um.</p>
       </div>
     </div>
-    <div class="problem-stmt">
-      O problema não é falta de criatividade. É falta de <strong>estrutura validada</strong> — ângulos, formatos e ganchos que já provaram que funcionam, adaptados pro seu negócio e público.
+
+    <div class="problem-stmt reveal">
+      O problema não é falta de criatividade. É falta de <strong>estrutura validada</strong> — ângulos, formatos e ganchos que já provaram que funcionam, adaptados pro seu negócio.
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
 <section class="how" id="como-funciona">
   <div class="wrap">
-    <div class="sec-tag">Como funciona</div>
-    <h2>8 perguntas. 60 segundos. <em>6 roteiros prontos</em> pra gravar.</h2>
+    <div class="sec-tag reveal">Como funciona</div>
+    <h2 class="reveal">8 perguntas. 60 segundos. <em>6 roteiros prontos</em> pra gravar.</h2>
+    <p class="sec-sub reveal">Do briefing ao roteiro filmável em quatro passos. Sem reunião, sem aprovação, sem espera.</p>
+
     <div class="steps">
-      <div class="step" data-n="01">
-        <div class="step-n">01 — Briefing</div>
-        <h3>Você responde 8 perguntas</h3>
-        <p>Produto, público, dor, solução, prova, estilo de gravação, ângulo e tom. Tudo que a IA precisa pra calibrar os roteiros pro seu cenário específico.</p>
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-tag">Briefing</div>
+          <h3>Você responde 8 perguntas</h3>
+          <p>Produto, público, dor, solução, prova, estilo de gravação, ângulo e tom. Tudo que a IA precisa pra calibrar os roteiros pro seu cenário específico — sem campo em branco inútil.</p>
+        </div>
       </div>
-      <div class="step" data-n="02">
-        <div class="step-n">02 — Análise</div>
-        <h3>A IA escolhe os melhores formatos</h3>
-        <p>O motor analisa seu público, nível de consciência e estilo — e seleciona os 3 formatos com maior potencial de conversão pra esse contexto.</p>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-tag">Análise</div>
+          <h3>A IA escolhe os formatos certos</h3>
+          <p>O motor analisa seu público, nível de consciência e estilo — e seleciona os 3 formatos com maior potencial de conversão pra esse contexto. Você não precisa saber quais são. Ela sabe.</p>
+        </div>
       </div>
-      <div class="step" data-n="03">
-        <div class="step-n">03 — Geração</div>
-        <h3>6 roteiros prontos em 45 segundos</h3>
-        <p>Cada formato vem com 2 variações (ângulos diferentes), fala completa, direção visual, instruções de gravação e checklist. Pronto pra apertar REC.</p>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-tag">Geração</div>
+          <h3>6 roteiros prontos em 60 segundos</h3>
+          <p>Cada formato vem com 2 variações (ângulos diferentes), fala completa, direção visual, instrução de gravação e checklist. Máximo 45 segundos por roteiro.</p>
+        </div>
       </div>
-      <div class="step" data-n="04">
-        <div class="step-n">04 — Gravação</div>
-        <h3>Você grava e publica</h3>
-        <p>Sem depender de agência, copywriter ou gestor. Os roteiros têm no máximo 45 segundos — cabem em qualquer formato de anúncio.</p>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-tag">Gravação</div>
+          <h3>Aperta REC e publica</h3>
+          <p>Sem depender de agência, copywriter ou gestor. Os roteiros cabem em qualquer formato de anúncio — Reels, Stories, TikTok, YouTube Shorts.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<!-- TESTIMONIAL -->
+<!-- ============================================================
+     TESTIMONIAL
+     ============================================================ -->
 <section class="testimonial-sec">
   <div class="wrap">
-    <div class="sec-tag">Quem já usa</div>
-    <h2>Resultados de quem <em>já gravou.</em></h2>
+    <div class="sec-tag reveal">Quem já gravou</div>
+    <h2 class="reveal">O que aconteceu com quem <em>já apertou REC.</em></h2>
 
-    <div class="testimonial">
-      <div class="test-quote">Ferramenta sensacional! Trabalho criando roteiros semanalmente para meus clientes e para mim mesmo. A ferramenta conseguiu gerar roteiros que realmente dão resultado. Um dos roteiros que fiz com a ferramenta já faturei +R$1.000,00 no tráfego.</div>
-      <div class="test-person"><strong>Gestor de tráfego</strong> — usuário do plano Agências</div>
+    <div class="testimonial reveal">
+      <div class="test-quote">Ferramenta sensacional. Trabalho criando roteiros semanalmente para meus clientes e para mim mesmo. A ferramenta conseguiu gerar roteiros que realmente dão resultado. Um dos roteiros que fiz já me trouxe <strong style="color:var(--ac);font-style:italic;font-weight:400">+R$1.000 em tráfego.</strong></div>
+      <div class="test-person">
+        <strong>Gestor de tráfego</strong>
+        <span class="test-badge">Plano Agências</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
 <section class="pricing" id="planos">
   <div class="wrap">
-    <div class="sec-tag">Planos</div>
-    <h2>Escolha seu <em>plano.</em></h2>
-    <p class="pricing-sub">Acesso imediato após o pagamento. Cancele quando quiser.</p>
+    <div class="sec-tag reveal">Planos</div>
+    <h2 class="reveal">Escolha seu <em>plano.</em> Acesso imediato.</h2>
+    <p class="sec-sub reveal">Cancele quando quiser, sem burocracia. Pagamento via Kiwify.</p>
+
     <div class="plans">
-      <div class="plan">
+      <div class="plan reveal">
         <div class="plan-name">Essencial</div>
-        <div class="plan-price"><span>R$</span>37</div>
+        <div class="plan-price"><span class="currency">R$</span>37</div>
         <div class="plan-period">por mês</div>
         <ul class="plan-features">
           <li><strong>Acesso completo</strong> à ferramenta</li>
-          <li><strong>4 gerações</strong> por mês (= 24 roteiros)</li>
+          <li><strong>4 gerações</strong> por mês — 24 roteiros prontos</li>
           <li>3 formatos validados por geração</li>
-          <li>Instruções de gravação completas</li>
-          <li>Checklist visual</li>
+          <li>Fala + direção visual + checklist</li>
           <li>Download em PDF</li>
           <li>Sem repetição de formatos entre gerações</li>
         </ul>
-        <a href="https://pay.kiwify.com.br/7G5JvcB" class="plan-cta outline">Assinar Essencial →</a>
+        <a href="https://pay.kiwify.com.br/7G5JvcB" class="plan-cta">Assinar Essencial →</a>
+        <div class="plan-microcopy">Acesso imediato após pagamento</div>
       </div>
-      <div class="plan featured">
+
+      <div class="plan featured reveal">
         <div class="plan-badge">Mais popular</div>
         <div class="plan-name">Agências</div>
-        <div class="plan-price"><span>R$</span>97</div>
+        <div class="plan-price"><span class="currency">R$</span>97</div>
         <div class="plan-period">por mês</div>
         <ul class="plan-features">
           <li><strong>Tudo do Essencial</strong></li>
-          <li><strong>15 gerações</strong> por mês (= 90 roteiros)</li>
+          <li><strong>15 gerações</strong> por mês — 90 roteiros</li>
           <li>Volume para múltiplos clientes</li>
-          <li>Ideal para gestores de tráfego</li>
-          <li>Roteiros personalizados por cliente</li>
-          <li>Instrução de câmera, tom e edição</li>
-          <li>Erros que matam cada formato</li>
+          <li>Roteiros personalizados por briefing</li>
+          <li>Instrução de câmera, tom e edição incluídas</li>
+          <li>Aprenda os erros que matam cada formato</li>
         </ul>
         <a href="https://pay.kiwify.com.br/xCF0TeQ" class="plan-cta">Assinar Agências →</a>
+        <div class="plan-microcopy">Acesso imediato após pagamento</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
 <section class="faq">
   <div class="wrap">
-    <div class="sec-tag">Dúvidas</div>
-    <h2>Perguntas <em>frequentes.</em></h2>
+    <div class="sec-tag reveal">Dúvidas</div>
+    <h2 class="reveal">Perguntas diretas. <em>Respostas diretas.</em></h2>
 
-    <div class="faq-item">
-      <button class="faq-q">Preciso saber escrever copy pra usar?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Não. Você responde 8 perguntas sobre seu produto e público — a IA cuida de tudo. O roteiro já vem com fala completa, pronto pra gravar. Sem conhecimento técnico necessário.</div>
-    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Preciso saber escrever copy pra usar?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>Não. Você responde 8 perguntas sobre seu produto e público — a IA cuida do resto. O roteiro já vem com fala completa, pronto pra gravar. Sem conhecimento técnico necessário.</div></div></div>
+      </div>
 
-    <div class="faq-item">
-      <button class="faq-q">Funciona pra qualquer nicho?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Sim. A IA adapta os roteiros baseada nas suas respostas — produto, público, tom e estilo. Já foi usado em infoprodutos, serviços locais, e-commerce, SaaS e mentorias.</div>
-    </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Funciona pra qualquer nicho?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>Sim. Os roteiros são calibrados com base nas suas respostas — produto, público, tom e estilo. Já foi usado em infoprodutos, serviços locais, e-commerce, SaaS e mentorias.</div></div></div>
+      </div>
 
-    <div class="faq-item">
-      <button class="faq-q">Quanto tempo leva pra gerar os roteiros?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Em média 60 segundos após você completar o briefing de 8 perguntas. O resultado vem com 6 roteiros completos — fala, visual e instruções de gravação.</div>
-    </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Já tentei IA antes e não funcionou. Por que seria diferente?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>Porque o problema não é a IA — é que você não sabia quais perguntas fazer. O CRIATIVO.AI faz as perguntas certas antes de gerar qualquer coisa. O briefing de 8 perguntas é o que separa um roteiro genérico de um que parece Reel.</div></div></div>
+      </div>
 
-    <div class="faq-item">
-      <button class="faq-q">Posso cancelar quando quiser?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Sim. A assinatura é mensal e você cancela a qualquer momento diretamente pelo Kiwify, sem burocracia.</div>
-    </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Quanto tempo leva pra gerar os roteiros?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>Em média 60 segundos após o briefing. Você sai com 6 roteiros completos — fala, visual e instruções de gravação. Não tem reunião, não tem aprovação, não tem espera.</div></div></div>
+      </div>
 
-    <div class="faq-item">
-      <button class="faq-q">Posso usar pra mais de um cliente?<span class="faq-icon">+</span></button>
-      <div class="faq-a">O plano Agências foi feito pra isso — volume suficiente pra atender múltiplos clientes por mês. Cada geração é um briefing diferente, então os roteiros são sempre personalizados pro produto e público de cada cliente.</div>
-    </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Posso usar pra mais de um cliente?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>O plano Agências foi feito pra isso — 15 gerações mensais, volume suficiente pra atender múltiplos clientes. Cada geração é um briefing diferente, então os roteiros são sempre personalizados pro produto e público de cada cliente.</div></div></div>
+      </div>
 
-    <div class="faq-item">
-      <button class="faq-q">Os roteiros repetem os mesmos formatos?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Não. O sistema bloqueia automaticamente os formatos já usados nas gerações anteriores do mês — garantindo que cada geração traga ângulos novos.</div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Como funciona o cancelamento?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><div>A assinatura é mensal. Você cancela diretamente pelo Kiwify, quando quiser, sem burocracia. Sem multa, sem fidelidade.</div></div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
+<!-- ============================================================
+     CTA FINAL
+     ============================================================ -->
 <section class="cta-final">
   <div class="wrap">
-    <h2>Pronto pra apertar <em>REC?</em></h2>
-    <p>Do briefing ao roteiro filmável em menos de 60 segundos. Sem agência, sem copywriter, sem achismo.</p>
-    <a href="#planos" class="btn-primary">Quero meus roteiros agora →</a>
+    <h2 class="reveal">Pronto pra apertar <span class="rec"><span class="rec-dot"></span>REC?</span></h2>
+    <p class="reveal">Do briefing ao roteiro filmável em menos de 60 segundos. Com os formatos que já geraram R$7M em faturamento — adaptados pro seu produto, público e tom.</p>
+    <a href="#planos" class="btn btn-primary reveal">Quero meus roteiros agora →</a>
+    <div class="cta-final-micro reveal">Acesso imediato após o pagamento · Cancele quando quiser</div>
   </div>
 </section>
 
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
 <footer>
   <div class="wrap footer-inner">
-    <div class="footer-logo">
+    <div class="logo">
       <span class="dot"></span>
       CRIATIVO<span class="ai">.AI</span>
     </div>
-    <div class="footer-copy">© 2025 CRIATIVO.AI — Todos os direitos reservados</div>
+    <div class="footer-copy">© 2025 CRIATIVO.AI — Roteiros que vendem</div>
   </div>
 </footer>
 
 <script>
-// FAQ toggle
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
+(() => {
+  'use strict';
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
+  // ============================================================
+  // STAGGERED HERO REVEAL — fires immediately on load
+  // ============================================================
+  const hero = document.getElementById('hero-stagger');
+  if (hero) {
+    requestAnimationFrame(() => {
+      setTimeout(() => hero.classList.add('in'), 80);
+    });
+  }
+
+  // ============================================================
+  // SCROLL REVEAL — sections fade in as they enter viewport
+  // ============================================================
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    // Stagger reveal of cards within the same row
+    if (el.classList.contains('pain') || el.classList.contains('step') ||
+        el.classList.contains('plan') || el.classList.contains('faq-item')) {
+      el.style.transitionDelay = `${(i % 4) * 90}ms`;
     }
+    revealObserver.observe(el);
   });
-}, { threshold: 0.1 });
 
-document.querySelectorAll('.pain, .step, .format, .plan, .testimonial, .test-placeholder').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity .6s ease, transform .6s ease';
-  observer.observe(el);
-});
+  // ============================================================
+  // COUNTER ANIMATION — stats animate when scrolled into view
+  // ============================================================
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.counter, 10);
+      const duration = 1200;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.floor(eased * target);
+        if (t < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target;
+        }
+      };
+      requestAnimationFrame(tick);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-counter]').forEach((el) => counterObserver.observe(el));
+
+  // ============================================================
+  // FAQ ACCORDION — smooth grid-row height transition
+  // ============================================================
+  document.querySelectorAll('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach((i) => i.classList.remove('open'));
+      // Toggle this one
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ============================================================
+  // NAV: subtle hide on scroll down (mobile niceness)
+  // ============================================================
+  const nav = document.querySelector('nav');
+  let lastY = 0;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y > 100 && y > lastY) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+      nav.style.transition = 'transform .35s cubic-bezier(.2,.8,.2,1)';
+      lastY = y;
+      ticking = false;
+    });
+    ticking = true;
+  }, { passive: true });
+
+})();
 </script>
 </body>
 </html>
